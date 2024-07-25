@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Cart {
+public class Cart extends BaseEntity{
 
     @Id
     @Column(name = "cart_id")

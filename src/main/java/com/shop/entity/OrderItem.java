@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class OrderItem {
+public class OrderItem extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,10 +29,6 @@ public class OrderItem {
     private int orderPrice; //주문가격
 
     private int count; //수량
-
-    private LocalDateTime regTime;
-
-    private LocalDateTime updateTime;
 
     @Builder
     public OrderItem(Item item, Order order, int orderPrice, int count) {
