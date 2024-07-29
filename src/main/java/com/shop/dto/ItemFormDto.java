@@ -2,9 +2,12 @@ package com.shop.dto;
 
 import com.shop.constant.ItemSellStatus;
 import com.shop.entity.Item;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.config.Configuration;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -13,6 +16,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class ItemFormDto {
 
     private Long id;
@@ -38,10 +42,20 @@ public class ItemFormDto {
     private static ModelMapper modelMapper = new ModelMapper();
 
     public Item createItem(){
+        modelMapper.getConfiguration().setFieldMatchingEnabled(true).setFieldAccessLevel(Configuration.AccessLevel.PRIVATE);
         return modelMapper.map(this, Item.class);
     }
 
     public static ItemFormDto of(Item item){
         return modelMapper.map(item, ItemFormDto.class);
+    }
+
+    @Builder
+    public ItemFormDto(String itemNm, Integer price, String itemDetail, Integer stockNumber, ItemSellStatus itemSellStatus) {
+        this.itemNm = itemNm;
+        this.price = price;
+        this.itemDetail = itemDetail;
+        this.stockNumber = stockNumber;
+        this.itemSellStatus = itemSellStatus;
     }
 }

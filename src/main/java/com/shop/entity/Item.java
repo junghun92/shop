@@ -1,6 +1,7 @@
 package com.shop.entity;
 
 import com.shop.constant.ItemSellStatus;
+import com.shop.dto.ItemFormDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -33,13 +34,19 @@ public class Item extends BaseEntity{
     private ItemSellStatus itemSellStatus; //상품 판매 상태
 
     @Builder
-    public Item(String itemNm, int price, int stockNumber, String itemDetail, ItemSellStatus itemSellStatus, LocalDateTime regTime, LocalDateTime updateTime) {
+    public Item(String itemNm, int price, int stockNumber, String itemDetail, ItemSellStatus itemSellStatus) {
         this.itemNm = itemNm;
         this.price = price;
         this.stockNumber = stockNumber;
         this.itemDetail = itemDetail;
         this.itemSellStatus = itemSellStatus;
-        regTime = regTime;
-        updateTime = updateTime;
+    }
+
+    public void updateItem(ItemFormDto itemFormDto){
+        this.itemNm = itemFormDto.getItemNm();
+        this.price = itemFormDto.getPrice();
+        this.stockNumber = itemFormDto.getStockNumber();
+        this.itemDetail = itemFormDto.getItemDetail();
+        this.itemSellStatus = itemFormDto.getItemSellStatus();
     }
 }
